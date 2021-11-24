@@ -14,6 +14,11 @@ namespace Bookish.ConsoleApp.Models
             LoanList = _loansRepository.GetAllActiveLoans();
         }
 
+        public Loans(Book book)
+        {
+            LoanList = _loansRepository.GetActiveLoansByBookId(book.bookID);
+        }
+
         public bool ProcessLoan(int userId, int bookId)
         {
             UpdateLoans();
@@ -23,6 +28,11 @@ namespace Bookish.ConsoleApp.Models
         public void UpdateLoans()
         {
             LoanList = _loansRepository.GetAllActiveLoans();
+        }
+
+        public void GetLoansByBook(int bookId)
+        {
+            LoanList = _loansRepository.GetActiveLoansByBookId(bookId);
         }
         
         public void PrintAllLoans()

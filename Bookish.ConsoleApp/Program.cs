@@ -6,10 +6,11 @@
         {
             Library library = new Library();
             //library.PrintAllBooks();
-            library.PrintAllLoans();
-            library.CheckInBook(1);
+            //.PrintAllLoans();
+            //library.Checkin(1);
             //library.PrintStockOf(4);
-            //library.Checkout(1,4);
+            library.Checkout(1,4);
+            library.PrintStockOf(4);
         }
     }
 }

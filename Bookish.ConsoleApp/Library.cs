@@ -73,13 +73,22 @@ namespace Bookish.ConsoleApp
         public void PrintStockOf(int bookId)
         {
             var book = _books.GetBookById(bookId);
-            var stock = book.BookCopies - _loans.OnLoan(book.bookID);
+            var thisLoans = new Loans(book);
+            var stock = book.BookCopies - thisLoans.LoanList.Count;
             Console.WriteLine(book.bookTitle);
             Console.WriteLine($"{book.BookCopies} in circulation");
             Console.WriteLine($"{stock} copies available");
+            Console.WriteLine("Loaned by:");
+            foreach (var thisLoan in thisLoans.LoanList)
+            {
+                Console.WriteLine($"{thisLoan.UserName} due {thisLoan.LoanDuedate}");
+            }
+            {
+                
+            }
         }
 
-        public void CheckInBook(int loanId)
+        public void Checkin(int loanId)
         {
             _loans.CheckIn(loanId);
         }
