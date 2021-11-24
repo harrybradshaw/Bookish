@@ -11,8 +11,9 @@ namespace Bookish.ConsoleApp
     {
         static void Main(string[] args)
         {
-            BooksRepository booksRepository = new BooksRepository();
-            Console.WriteLine(booksRepository.GetBook(1).bookTitle);
+            Library library = new Library();
+            //library.PrintAllBooks();
+            library.PrintAllLoans();
         }
     }
 }
