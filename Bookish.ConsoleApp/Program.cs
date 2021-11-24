@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using Bookish.ConsoleApp.Api;
-using Dapper;
-
-namespace Bookish.ConsoleApp
+﻿namespace Bookish.ConsoleApp
 {
     class Program
     {
@@ -14,6 +7,9 @@ namespace Bookish.ConsoleApp
             Library library = new Library();
             //library.PrintAllBooks();
             library.PrintAllLoans();
+            library.CheckInBook(1);
+            //library.PrintStockOf(4);
+            //library.Checkout(1,4);
         }
     }
 }

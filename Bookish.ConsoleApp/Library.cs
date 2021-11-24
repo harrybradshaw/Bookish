@@ -7,17 +7,16 @@ namespace Bookish.ConsoleApp
 {
     public class Library
     {
-        public List<Book> Books;
-        public List<Loan> Loans;
+        private Books _books = new();
+        private Loans _loans = new();
         private readonly BooksRepository _bookRepository = new ();
         private readonly LoansRepository _loansRepository = new();
 
         public Library()
         {
-            
-            Books = _bookRepository.GetBooks();
-            Loans = _loansRepository.GetAllActiveLoans();
-            foreach (var book in Books)
+            _books.BookList = _bookRepository.GetBooks();
+            _loans.LoanList = _loansRepository.GetAllActiveLoans();
+            foreach (var book in _books.BookList)
             {
                 book.SetAuthorList(_bookRepository.GetAllAuthorsForBook(book.bookID));
             }
@@ -26,8 +25,8 @@ namespace Bookish.ConsoleApp
         public void UpdateBooks()
         {
             //Probably better to reduce overhead and not do a full call here. A fix for later. 
-            Books = _bookRepository.GetBooks();
-            foreach (var book in Books)
+            _books.BookList = _bookRepository.GetBooks();
+            foreach (var book in _books.BookList)
             {
                 book.SetAuthorList(_bookRepository.GetAllAuthorsForBook(book.bookID));
             }
@@ -36,7 +35,7 @@ namespace Bookish.ConsoleApp
         public void PrintAllBooks()
         {
             UpdateBooks();
-            foreach (var book in Books)
+            foreach (var book in _books.BookList)
             {
                 string tempString = "";
                 int i = 0;
@@ -50,16 +49,39 @@ namespace Bookish.ConsoleApp
 
                     i++;
                 }
-                Console.WriteLine($"{book.bookTitle} - {tempString}");
+                Console.WriteLine($"'{book.bookTitle}' - {tempString} [{book.BookCopies} copies / {_loans.OnLoan(book.bookID)} on loan]");
             }
         }
 
+        public void Checkout(int userId, int bookId)
+        {
+            var book = _books.GetBookById(bookId);
+            if (book.BookCopies - _loans.OnLoan(bookId) >= 1)
+            {
+                _loans.ProcessLoan(userId,bookId);
+            }
+            else
+            {
+                Console.WriteLine("No copies available!");
+            }
+        }
         public void PrintAllLoans()
         {
-            foreach (var loan in Loans)
-            {
-                Console.WriteLine($"{loan.LoanId}: {loan.BookTitle} on loan by {loan.UserName} from {loan.LoanOutdate} to {loan.LoanDuedate}");
-            }
+            _loans.PrintAllLoans();
+        }
+
+        public void PrintStockOf(int bookId)
+        {
+            var book = _books.GetBookById(bookId);
+            var stock = book.BookCopies - _loans.OnLoan(book.bookID);
+            Console.WriteLine(book.bookTitle);
+            Console.WriteLine($"{book.BookCopies} in circulation");
+            Console.WriteLine($"{stock} copies available");
+        }
+
+        public void CheckInBook(int loanId)
+        {
+            _loans.CheckIn(loanId);
         }
     }
 }

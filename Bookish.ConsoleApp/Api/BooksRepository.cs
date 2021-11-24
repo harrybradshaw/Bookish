@@ -12,7 +12,7 @@ namespace Bookish.ConsoleApp.Api
         private DbHelper dbHelp = new DbHelper();
         public List<Book> GetBooks()
         {
-            var sqlString = "SELECT * FROM [Books]";
+            var sqlString = "SELECT * FROM [Books] INNER JOIN AuthorBook AB on Books.bookID = AB.bookID INNER JOIN Authors A on A.authorID = AB.authorID ORDER BY A.authorName";
             using IDbConnection db = new SqlConnection(dbHelp.GetString());
             return (List<Book>)db.Query<Book>(sqlString);
         }

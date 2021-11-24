@@ -1,4 +1,5 @@
 using System;
+using Bookish.ConsoleApp.Api;
 
 namespace Bookish.ConsoleApp.Models
 {
@@ -11,5 +12,6 @@ namespace Bookish.ConsoleApp.Models
         public DateTime LoanDuedate;
         public string UserName;
         public string BookTitle;
+        public int UserId;
     }
 }

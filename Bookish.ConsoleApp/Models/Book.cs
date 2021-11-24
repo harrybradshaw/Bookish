@@ -1,13 +1,14 @@
 using System.Collections.Generic;
-using Bookish.ConsoleApp.Models;
 
-namespace Bookish.ConsoleApp
+namespace Bookish.ConsoleApp.Models
 {
     public class Book
     {
         public int bookID;
         public string bookTitle;
         public List<Author> AuthorList;
+        public int BookCopies;
+        
 
         public void SetAuthorList(List<Author> authorList)
         {
