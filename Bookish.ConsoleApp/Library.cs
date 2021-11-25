@@ -31,6 +31,7 @@ namespace Bookish.ConsoleApp
         public void PrintAllBooks()
         {
             var books = new Books();
+            Console.WriteLine("The library has...");
             foreach (var book in books.BookList)
             {
                 int i = 0;
@@ -42,10 +43,9 @@ namespace Bookish.ConsoleApp
                     {
                         tempString += ", ";
                     }
-
                     i++;
                 }
-                Console.WriteLine($"'{book.bookTitle}' - {tempString} [{book.BookCopies} copies / {_loansRepository.OnLoanByBookId(book.bookID)} on loan]");
+                Console.WriteLine($"'{book.bookTitle}' - {tempString} [{book.BookCopies} copies / {_loansRepository.OnLoanByBookId(book.bookID)} on loan] ({book.BookCoverString})");
             }
         }
         

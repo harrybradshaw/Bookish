@@ -8,20 +8,37 @@ namespace Bookish.Api.Models
     {
         public List<Loan> LoanList;
         private LoansRepository _loansRepository = new LoansRepository();
+        private BooksRepository _booksRepository = new BooksRepository();
 
         public Loans()
         {
             LoanList = _loansRepository.GetAllActiveLoans();
+            foreach (var loan in LoanList)
+            {
+                var book = _booksRepository.GetBook(loan.BookId);
+                book.SetAuthorList(_booksRepository.GetAllAuthorsForBook(loan.BookId));
+                loan.book = book;
+            }
         }
 
         public Loans(Book book)
         {
             LoanList = _loansRepository.GetActiveLoansByBookId(book.bookID);
+            foreach (var loan in LoanList)
+            {
+                loan.book = book;
+            }
         }
 
         public Loans(User user)
         {
             LoanList = _loansRepository.GetActiveLoansByUserId(user.UserID);
+            foreach (var loan in LoanList)
+            {
+                var book = _booksRepository.GetBook(loan.BookId);
+                book.SetAuthorList(_booksRepository.GetAllAuthorsForBook(loan.BookId));
+                loan.book = book;
+            }
         }
         
         public bool ProcessLoan(int userId, int bookId)

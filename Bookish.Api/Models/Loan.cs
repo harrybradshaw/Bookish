@@ -11,6 +11,8 @@ namespace Bookish.Api.Models
         public DateTime LoanDuedate;
         public string UserName;
         public string BookTitle;
+        public string BookAuthorString;
         public int UserId;
+        public Book book;
     }
 }

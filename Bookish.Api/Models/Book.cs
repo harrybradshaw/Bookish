@@ -9,10 +9,26 @@ namespace Bookish.Api.Models
         public string bookTitle;
         public List<Author> AuthorList;
         public int BookCopies;
+        public string BookCoverString;
+        public string AuthorString;
+        public string bookISBN;
         
         public void SetAuthorList(List<Author> authorList)
         {
             AuthorList = authorList;
+            int i = 0;
+            var tempString = "";
+            foreach (var author in AuthorList)
+            {
+                tempString += author.authorName;
+                if (i > 0)
+                {
+                    tempString += ", ";
+                }
+                i++;
+            }
+
+            AuthorString = tempString;
         }
         
         

@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlserver://localhost;database=Bookish</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="app" uuid="39f56a62-6080-4478-8fef-2bb18f5fa89b">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Work\Training\Bookish\Bookish\Bookish.Web\app.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

@@ -1,0 +1,31 @@
+@model Bookish.Web.Models.BookViewModel
+
+@{
+    ViewBag.Title = @Model.book.bookTitle;
+    Layout = "_Layout";
+}
+
+<h2>@Model.book.bookTitle</h2>
+<h5>@Model.book.AuthorString</h5>
+
+<div>
+    <p>@Model.book.bookISBN</p>
+</div>
+
+<div>
+    <h5>Copies</h5>
+    <p>There are @Model.CopiesRemaining copies available to loan.</p>
+    @if (Model.CopiesLoaned > 0)
+    {
+        <h5>Loans</h5>
+        <ol>
+            @foreach (var loan in Model.loans.LoanList)
+            {
+                <li>
+                    @loan.LoanOutdate.ToShortDateString() - @loan.LoanDuedate.ToShortDateString() on loan to @loan.UserName.
+                </li>
+            }
+        </ol>
+    }
+    
+</div>
