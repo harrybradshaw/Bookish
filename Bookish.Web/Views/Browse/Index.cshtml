@@ -1,20 +1,30 @@
-@model Bookish.Api.Models.Books
+@model Bookish.Web.Models.BrowseViewModel
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Browse Catalogue";
 }
-
-@foreach (var book in Model.BookList)
-{
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-                <a href="book/@book.bookID">@book.bookTitle</a>
-                <p>@book.AuthorString</p>
-                <input type="button" value="Create" onclick="location.href='@Url.Action("CheckoutBook", "Book", new {bookId = book.bookID})'" />
+<div class="card-columns">
+    @foreach (var book in Model.Books.BookList)
+        {
+            <div class="card mb-3" style="width: 18rem;">
+                <a href="book/@book.bookID">
+                    <img class="card-img-top" src="@book.BookCoverString" alt="BookCover">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title"><a href="book/@book.bookID">@book.bookTitle</a></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@book.AuthorString</h6>
+                    <p class="card-text">@(book.BookCopies - @book.BookCopiesLeft)/@book.BookCopies copies available</p>
+                    @if (book.BookCopies - book.BookCopiesLeft > 0)
+                    {
+                        <input type="button" class="btn btn-primary" value="Loan Book" onclick="location.href='@Url.Action("CheckoutBook", "Browse", new {bookId = book.bookID})'"/>
+                    }
+                    else
+                    {
+                        <input type="button" class="btn btn-primary" value="Unavailable" disabled/>
+                    }
+                </div>
             </div>
-        </div>
+        }
     </div>
 
     
-}

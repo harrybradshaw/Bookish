@@ -1,0 +1,22 @@
+@model SearchViewModel
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "_Layout";
+}
+
+<h2>Search Results</h2>
+
+<p>Found @Model.BooksFound.BookList.Count results for "@Model.SearchString".</p>
+@foreach (var book in Model.BooksFound.BookList)
+{
+    <ul>
+        <li>
+            <a href="/book/@book.bookID">
+                @book.bookTitle - @book.AuthorString
+            </a>
+        </li>
+    </ul>
+    
+}
+  

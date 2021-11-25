@@ -25,10 +25,6 @@ namespace Bookish.Web.Controllers
             return View(bvm);
         }
 
-        public void CheckoutBook(int bookId)
-        {
-            LibraryServices libraryServices = new LibraryServices();
-            libraryServices.Checkout(1, 1);
-        }
+        
     }
 }

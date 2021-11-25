@@ -10,7 +10,13 @@ namespace Bookish.Web.Services
         private readonly UserRepository _userRepository = new();
         public Books GetBooks()
         {
-            return new Books();
+            var books = new Books();
+            foreach (var book in books.BookList)
+            {
+                int copies = _loansRepository.OnLoanByBookId(book.bookID);
+                book.SetCopiesLeft(copies);
+            }
+            return books;
         }
 
         public Book GetBook(int bookId)
@@ -35,7 +41,7 @@ namespace Bookish.Web.Services
         
         public bool Checkout(int userId, int bookId)
         {
-            var book = _booksRepository.GetBook(1);
+            var book = _booksRepository.GetBook(bookId);
             if (book.BookCopies - _loansRepository.OnLoanByBookId(bookId) >= 1)
             {
                 _loansRepository.CheckoutBook(userId,bookId);
@@ -44,5 +50,22 @@ namespace Bookish.Web.Services
 
             return false;
         }
+        
+        public bool Checkin(int loanId)
+        {
+            return _loansRepository.CheckinBook(loanId);
+        }
+
+        public Books SearchLibrary(string searchString)
+        {
+            Books books = new Books();
+            books.BookList = _booksRepository.SearchBooks(searchString);
+            foreach (var book in books.BookList)
+            {
+                book.SetAuthorList(_booksRepository.GetAllAuthorsForBook(book.bookID));
+            }
+            return books;
+        }
+        
     }
 }

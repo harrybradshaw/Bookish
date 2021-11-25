@@ -12,6 +12,7 @@ namespace Bookish.Api.Models
         public string BookCoverString;
         public string AuthorString;
         public string bookISBN;
+        public int BookCopiesLeft;
         
         public void SetAuthorList(List<Author> authorList)
         {
@@ -29,6 +30,11 @@ namespace Bookish.Api.Models
             }
 
             AuthorString = tempString;
+        }
+
+        public void SetCopiesLeft(int copies)
+        {
+            BookCopiesLeft = copies;
         }
         
         

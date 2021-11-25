@@ -31,5 +31,12 @@ namespace Bookish.Api.Api
                 "SELECT A.authorName , A.authorID FROM Authors A INNER JOIN AuthorBook AB on A.authorID = AB.authorID INNER JOIN Books B on AB.bookID = B.bookID WHERE B.bookID = @BookId";
             return (List<Author>)db.Query<Author>(sqlString, new {BookId = bookId});
         }
+
+        public List<Book> SearchBooks(string searchString)
+        {
+            var sqlString = "SELECT * FROM Books B INNER JOIN AuthorBook AB on B.bookID = AB.bookID INNER JOIN Authors A on A.authorID = AB.authorID WHERE UPPER(B.bookTitle) LIKE UPPER(@SearchString) OR UPPER(A.authorName) LIKE UPPER(@SearchString) OR UPPER(B.bookISBN) LIKE UPPER(@SearchString) ORDER BY B.bookTitle";
+            using IDbConnection db = new SqlConnection(_dbHelp.GetString());
+            return (List<Book>)db.Query<Book>(sqlString, new {SearchString = '%'+searchString+'%'});
+        }
     }
 }

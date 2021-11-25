@@ -1,4 +1,5 @@
 using Bookish.Api.Models;
+using Bookish.Web.Models;
 using Bookish.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +12,17 @@ namespace Bookish.Web.Controllers
         {
             LibraryServices libraryServices = new LibraryServices();
             Books books = libraryServices.GetBooks();
-            return View(books);
+            BrowseViewModel bvm = new BrowseViewModel(books);
+            return View(bvm);
         }
+        public IActionResult CheckoutBook(int bookId)
+        {
+            LibraryServices libraryServices = new LibraryServices();
+            libraryServices.Checkout(1,bookId);
+            return RedirectToAction("Index");
+        }
+
+
+
     }
 }
