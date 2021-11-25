@@ -1,4 +1,4 @@
-namespace Bookish.ConsoleApp.Models
+namespace Bookish.Api.Models
 {
     public class Author
     {

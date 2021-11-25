@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Bookish.ConsoleApp.Models;
+using Bookish.Api.Models;
 using Dapper;
 
 namespace Bookish.ConsoleApp.Api

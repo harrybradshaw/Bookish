@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
+using Bookish.Api.Api;
+using Bookish.Api.Models;
 using Bookish.ConsoleApp.Api;
-using Bookish.ConsoleApp.Models;
 
 namespace Bookish.ConsoleApp
 {
@@ -9,7 +9,7 @@ namespace Bookish.ConsoleApp
     {
         private Books _books = new();
         private Loans _loans = new();
-        private readonly BooksRepository _bookRepository = new ();
+        private readonly BooksRepository _bookRepository = new();
         private readonly LoansRepository _loansRepository = new();
 
         public Library()
@@ -22,23 +22,12 @@ namespace Bookish.ConsoleApp
             }
         }
 
-        public void UpdateBooks()
-        {
-            //Probably better to reduce overhead and not do a full call here. A fix for later. 
-            _books.BookList = _bookRepository.GetBooks();
-            foreach (var book in _books.BookList)
-            {
-                book.SetAuthorList(_bookRepository.GetAllAuthorsForBook(book.bookID));
-            }
-        }
-
         public void PrintAllBooks()
         {
-            UpdateBooks();
             foreach (var book in _books.BookList)
             {
-                string tempString = "";
                 int i = 0;
+                var tempString = "";
                 foreach (var author in book.AuthorList)
                 {
                     tempString += author.authorName;
@@ -90,7 +79,7 @@ namespace Bookish.ConsoleApp
 
         public void Checkin(int loanId)
         {
-            _loans.CheckIn(loanId);
+            _loans.CheckInByLoanId(loanId);
         }
     }
 }

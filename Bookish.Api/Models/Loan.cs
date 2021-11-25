@@ -1,7 +1,6 @@
 using System;
-using Bookish.ConsoleApp.Api;
 
-namespace Bookish.ConsoleApp.Models
+namespace Bookish.Api.Models
 {
     public class Loan
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Bookish.ConsoleApp.Api;
 
-namespace Bookish.ConsoleApp.Models
+namespace Bookish.Api.Models
 {
     public class Loans
     {
@@ -61,7 +61,7 @@ namespace Bookish.ConsoleApp.Models
             return _loansRepository.OnLoan(bookId);
         }
 
-        public bool CheckIn(int loanId)
+        public bool CheckInByLoanId(int loanId)
         {
             UpdateLoans();
             return _loansRepository.CheckinBook(loanId);

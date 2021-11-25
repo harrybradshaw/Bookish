@@ -3,9 +3,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using Bookish.ConsoleApp.Models;
+using Bookish.Api.Models;
+using Bookish.ConsoleApp.Api;
 
-namespace Bookish.ConsoleApp.Api
+namespace Bookish.Api.Api
 {
     public class BooksRepository
     {

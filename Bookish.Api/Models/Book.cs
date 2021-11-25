@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Bookish.ConsoleApp.Models
+namespace Bookish.Api.Models
 {
     public class Book
     {
