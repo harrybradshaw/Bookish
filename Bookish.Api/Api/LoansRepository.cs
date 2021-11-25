@@ -6,7 +6,7 @@ using System.Linq;
 using Bookish.Api.Models;
 using Dapper;
 
-namespace Bookish.ConsoleApp.Api
+namespace Bookish.Api.Api
 {
     public class LoansRepository
     {
@@ -50,7 +50,7 @@ namespace Bookish.ConsoleApp.Api
             return rowsAltered > 0;
         }
 
-        public int OnLoan(int bookId)
+        public int OnLoanByBookId(int bookId)
         {
             using IDbConnection db = new SqlConnection(_dbHelp.GetString());
             var sqlString = "SELECT * FROM [Loans] WHERE [bookID] = @BookId AND [loanComplete] = 0";

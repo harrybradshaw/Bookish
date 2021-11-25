@@ -5,7 +5,7 @@ using System.Linq;
 using Bookish.Api.Models;
 using Dapper;
 
-namespace Bookish.ConsoleApp.Api
+namespace Bookish.Api.Api
 {
     public class UserRepository
     {

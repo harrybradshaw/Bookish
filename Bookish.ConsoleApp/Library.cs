@@ -1,7 +1,6 @@
 using System;
 using Bookish.Api.Api;
 using Bookish.Api.Models;
-using Bookish.ConsoleApp.Api;
 
 namespace Bookish.ConsoleApp
 {
@@ -71,9 +70,6 @@ namespace Bookish.ConsoleApp
             foreach (var thisLoan in thisLoans.LoanList)
             {
                 Console.WriteLine($"{thisLoan.UserName} due {thisLoan.LoanDuedate}");
-            }
-            {
-                
             }
         }
 

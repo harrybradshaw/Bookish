@@ -4,7 +4,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using Bookish.Api.Models;
-using Bookish.ConsoleApp.Api;
 
 namespace Bookish.Api.Api
 {

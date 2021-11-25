@@ -1,4 +1,4 @@
-namespace Bookish.ConsoleApp.Api
+namespace Bookish.Api.Api
 {
     public class DbHelper
     {
