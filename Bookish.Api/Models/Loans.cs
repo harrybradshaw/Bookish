@@ -19,9 +19,14 @@ namespace Bookish.Api.Models
             LoanList = _loansRepository.GetActiveLoansByBookId(book.bookID);
         }
 
+        public Loans(User user)
+        {
+            LoanList = _loansRepository.GetActiveLoansByUserId(user.UserID);
+        }
+        
         public bool ProcessLoan(int userId, int bookId)
         {
-            UpdateLoans();
+            //UpdateLoans();
             return _loansRepository.CheckoutBook(userId, bookId);
         }
 
@@ -34,36 +39,16 @@ namespace Bookish.Api.Models
         {
             LoanList = _loansRepository.GetActiveLoansByBookId(bookId);
         }
-        
-        public void PrintAllLoans()
-        {
-            UpdateLoans();
-            Console.WriteLine("---------------------");
-            Console.WriteLine("Summary of all loans");
-            Console.WriteLine("---------------------");
-            int i = 1;
-            foreach (var loan in LoanList)
-            {
-                Console.WriteLine($"{i}: {loan.BookTitle} on loan by {loan.UserName} from {loan.LoanOutdate.ToShortDateString()} to {loan.LoanDuedate.ToShortDateString()}");
-                i++;
-            }
-
-            if (i == 1)
-            {
-                Console.WriteLine("No books on loan!");
-            }
-            Console.WriteLine("---------------------");
-        }
 
         public int OnLoan(int bookId)
         {
-            UpdateLoans();
+            //UpdateLoans();
             return _loansRepository.OnLoanByBookId(bookId);
         }
 
         public bool CheckInByLoanId(int loanId)
         {
-            UpdateLoans();
+            //UpdateLoans();
             return _loansRepository.CheckinBook(loanId);
         }
     }

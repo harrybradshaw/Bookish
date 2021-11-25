@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Bookish.Api.Api;
 
 namespace Bookish.Api.Models
 {
@@ -9,10 +10,11 @@ namespace Bookish.Api.Models
         public List<Author> AuthorList;
         public int BookCopies;
         
-
         public void SetAuthorList(List<Author> authorList)
         {
             AuthorList = authorList;
         }
+        
+        
     }
 }

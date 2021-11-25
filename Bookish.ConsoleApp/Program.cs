@@ -1,17 +1,20 @@
-﻿namespace Bookish.ConsoleApp
+﻿using System.Linq;
+using Bookish.Api.Models;
+
+namespace Bookish.ConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
         {
             Library library = new Library();
-            //library.PrintAllBooks();
+            library.PrintAllBooks();
+            //library.Checkout(2,3);
             //library.PrintAllLoans();
-            library.Checkin(4);
-            library.PrintAllLoans();
-            //library.PrintStockOf(4);
-            //library.Checkout(1,4);
-            //library.PrintStockOf(4);
+            // var user = library.GetUserById(1);
+            // var loans = new Loans(user);
+            // library.Checkin(loans.LoanList[0].LoanId);
+            // library.PrintLoansByUser(user.UserID);
         }
     }
 }

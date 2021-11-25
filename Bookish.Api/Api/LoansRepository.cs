@@ -30,7 +30,7 @@ namespace Bookish.Api.Api
         {
             using IDbConnection db = new SqlConnection(_dbHelp.GetString());
             var sqlString = "SELECT * FROM [Loans] INNER JOIN Books B on B.bookID = Loans.bookID INNER JOIN Users U on U.userID = Loans.userID WHERE Loans.userID = @UserId AND loanComplete = 0";
-            return (List<Loan>) db.Query<Loan>(sqlString);
+            return (List<Loan>) db.Query<Loan>(sqlString, new {@UserId = userId});
         }
 
         public bool CheckoutBook(int userId, int bookId)
