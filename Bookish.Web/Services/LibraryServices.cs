@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Bookish.Api.Models;
 using Bookish.Api.Api;
 
@@ -65,6 +66,26 @@ namespace Bookish.Web.Services
                 book.SetAuthorList(_booksRepository.GetAllAuthorsForBook(book.bookID));
             }
             return books;
+        }
+
+        public Books GetBooksByAuthorNotInc(int bookId, List<Author> authorList)
+        {
+            Books booksByAuthor = new Books();
+            foreach (var author in authorList)
+            {
+                booksByAuthor.BookList = _booksRepository.GetBooksForAuthor(author.authorName, bookId);
+            }
+            foreach (var book in booksByAuthor.BookList)
+            {
+                book.SetAuthorList(_booksRepository.GetAllAuthorsForBook(book.bookID));
+            }
+            return booksByAuthor;
+        }
+
+        public bool AddBookFromRequest(string bookTitle, string bookAuthors, string bookDesc)
+        {
+            var bookId = _booksRepository.AddBook(bookTitle, bookDesc);
+            return true;
         }
         
     }

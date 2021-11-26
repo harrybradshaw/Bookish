@@ -19,7 +19,7 @@ namespace Bookish.Web.Controllers
         {
             LibraryServices libraryServices = new LibraryServices();
             libraryServices.Checkout(1,bookId);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
 
 

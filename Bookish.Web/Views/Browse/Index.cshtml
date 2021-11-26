@@ -16,11 +16,11 @@
                     <p class="card-text">@(book.BookCopies - @book.BookCopiesLeft)/@book.BookCopies copies available</p>
                     @if (book.BookCopies - book.BookCopiesLeft > 0)
                     {
-                        <input type="button" class="btn btn-primary" value="Loan Book" onclick="location.href='@Url.Action("CheckoutBook", "Browse", new {bookId = book.bookID})'"/>
+                        <input type="button" class="btn btn-success" value="Loan Book" onclick="location.href='@Url.Action("CheckoutBook", "Browse", new {bookId = book.bookID})'"/>
                     }
                     else
                     {
-                        <input type="button" class="btn btn-primary" value="Unavailable" disabled/>
+                        <input type="button" class="btn btn-danger" value="Unavailable" disabled/>
                     }
                 </div>
             </div>

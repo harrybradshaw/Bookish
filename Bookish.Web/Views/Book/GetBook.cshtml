@@ -4,28 +4,66 @@
     ViewBag.Title = @Model.book.bookTitle;
     Layout = "_Layout";
 }
-
-<h2>@Model.book.bookTitle</h2>
-<h5>@Model.book.AuthorString</h5>
-
 <div>
-    <p>ISBN: @Model.book.bookISBN</p>
-</div>
-
-<div>
-    <h5>Copies</h5>
-    <p>There are @Model.CopiesRemaining copies available to loan.</p>
-    @if (Model.CopiesLoaned > 0)
-    {
-        <h5>Loans</h5>
-        <ol>
-            @foreach (var loan in Model.loans.LoanList)
-            {
-                <li>
-                    @loan.LoanOutdate.ToShortDateString() - @loan.LoanDuedate.ToShortDateString() on loan to @loan.UserName.
-                </li>
-            }
-        </ol>
-    }
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>@Model.book.bookTitle</h2>
+                    <h5>@Model.book.AuthorString</h5>
+                    <div>
+                        <p>ISBN: @Model.book.bookISBN</p>
+                        <p>@Model.book.BookInfo</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="@Model.book.BookCoverString" alt="BookCover" class="img-thumbnail" style="max-height:400px">
+                </div>
+            </div>
+        </div>
+    </div>
     
+    <div style="padding: 10px">
+        <h5>Copies</h5>
+        @if (Model.CopiesRemaining == 1)
+        {
+            <p>There is 1 copy available to loan.</p>
+        }
+        else
+        {
+            <p>There are @Model.CopiesRemaining copies available to loan.</p>
+        }
+
+        @if (Model.CopiesRemaining > 0)
+        {
+            <input type="button" class="btn btn-success" value="Loan Book" onclick="location.href='@Url.Action("CheckoutBook", "Browse", new {bookId = Model.book.bookID})'"/>
+        }
+    </div>
+    <div style="padding: 10px">
+        @if (Model.CopiesLoaned > 0)
+        {
+            <h5>Loans</h5>
+            <ol>
+                @foreach (var loan in Model.loans.LoanList)
+                {
+                    <li>
+                        @loan.LoanOutdate.ToShortDateString() - @loan.LoanDuedate.ToShortDateString() on loan to @loan.UserName.
+                    </li>
+                }
+            </ol>
+        }
+            
+    </div>
+    @if (Model.BooksByAuthor.BookList.Count > 0)
+    {
+        <div class="container">
+            <h5>Other books by this author</h5>
+            <ul>
+                @foreach (var book in Model.BooksByAuthor.BookList)
+                {
+                    <li><a href="/book/@book.bookID">@book.bookTitle</a></li>
+                }
+            </ul>
+        </div>
+    }
 </div>

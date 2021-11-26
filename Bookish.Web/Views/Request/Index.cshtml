@@ -1,0 +1,30 @@
+@model dynamic
+
+@{
+    ViewBag.Title = "Request";
+    Layout = "_Layout";
+}
+
+<h2>Request a Book</h2>
+<div style="padding:20px">
+    <form>
+        <div class="container">
+            <div class="form-group">
+                        <label for="bookTitle">Book Title</label>
+                        <input type="text" name="bookTitle" id="bookTitle" class="form-control" placeholder="Eg. Animal Farm" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="BookAuthors">Book Author(s)</label>
+                        <input type="text" name="bookAuthors" id="bookAuthors" class="form-control" placeholder="Eg. George Orwell" required/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="bookDesc">Book Description</label>
+                        <textarea type="text" name="bookDesc" id="bookDesc" class="form-control" placeholder="Eg. Something about communism." required></textarea>
+                    </div>
+
+            <button type="submit" class="btn btn-primary">Request this book!</button>
+        </div>
+    </form>
+</div>

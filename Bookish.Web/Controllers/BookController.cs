@@ -21,7 +21,8 @@ namespace Bookish.Web.Controllers
             LibraryServices libraryServices = new LibraryServices();
             var book = libraryServices.GetBook(bookId);
             var loans = libraryServices.GetLoansByBook(book);
-            var bvm = new BookViewModel(book, loans);
+            var booksAuthor = libraryServices.GetBooksByAuthorNotInc(bookId,book.AuthorList);
+            var bvm = new BookViewModel(book, loans, booksAuthor);
             return View(bvm);
         }
 
