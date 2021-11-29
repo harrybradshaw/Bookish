@@ -9,6 +9,7 @@ namespace Bookish.Web.Services
         private readonly BooksRepository _booksRepository = new BooksRepository();
         private readonly LoansRepository _loansRepository = new();
         private readonly UserRepository _userRepository = new();
+        private readonly AuthorRepository _authorRepository = new();
         public Books GetBooks()
         {
             var books = new Books();
@@ -84,7 +85,28 @@ namespace Bookish.Web.Services
 
         public bool AddBookFromRequest(string bookTitle, string bookAuthors, string bookDesc)
         {
+            var authorList = bookAuthors.Split(",");
+            var authorIdList = new List<int>();
+            foreach (var author in authorList)
+            {
+                var tempString = author.Trim();
+                var tempId = _authorRepository.AuthorExists(author);
+                if (tempId == -1)
+                {
+                    authorIdList.Add(_authorRepository.AddAuthor(author));
+                }
+                else
+                {
+                    authorIdList.Add(tempId);
+                }
+            }
             var bookId = _booksRepository.AddBook(bookTitle, bookDesc);
+
+            foreach (var authorId in authorIdList)
+            {
+                _authorRepository.AddAuthorBook(authorId,bookId);
+            }
+            
             return true;
         }
         

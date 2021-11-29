@@ -3,10 +3,12 @@
 @{
     ViewData["Title"] = "Browse Catalogue";
 }
-<div class="card-columns">
+<div class="container">
+<div class="row row-cols-1 row-cols-md-2 g-4">
     @foreach (var book in Model.Books.BookList)
-        {
-            <div class="card mb-3" style="width: 18rem;">
+    {
+        <div class="col mb-3" style="width: 18rem;">
+            <div class="card h-100">
                 <a href="book/@book.bookID">
                     <img class="card-img-top" src="@book.BookCoverString" alt="BookCover">
                 </a>
@@ -14,17 +16,21 @@
                     <h5 class="card-title"><a href="book/@book.bookID">@book.bookTitle</a></h5>
                     <h6 class="card-subtitle mb-2 text-muted">@book.AuthorString</h6>
                     <p class="card-text">@(book.BookCopies - @book.BookCopiesLeft)/@book.BookCopies copies available</p>
-                    @if (book.BookCopies - book.BookCopiesLeft > 0)
+                </div>
+                <div class="card-footer text-center">
+                    
+                        @if (book.BookCopies - book.BookCopiesLeft > 0)
                     {
-                        <input type="button" class="btn btn-success" value="Loan Book" onclick="location.href='@Url.Action("CheckoutBook", "Browse", new {bookId = book.bookID})'"/>
+                        <input type="button" class="btn btn-success btn-block" value="Loan Book" onclick="location.href='@Url.Action("CheckoutBook", "Browse", new {bookId = book.bookID})'"/>
                     }
                     else
                     {
-                        <input type="button" class="btn btn-danger" value="Unavailable" disabled/>
+                        <input type="button" class="btn btn-danger btn-block" value="Unavailable" disabled/>
                     }
                 </div>
             </div>
-        }
-    </div>
-
+            </div>
+    }
+</div>
+</div>
     

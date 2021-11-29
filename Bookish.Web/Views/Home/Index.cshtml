@@ -22,7 +22,10 @@
                         <h5 class="card-title"><a href="book/@loan.BookId" class="card-title">@loan.BookTitle</a></h5>
                         <h6 class="card-subtitle mb-2 text-muted">@loan.book.AuthorString</h6>
                         <p class="card-text">Due: @loan.LoanDuedate.ToShortDateString()</p>
-                        <input class="btn btn-primary" type="button" value="Return Book" onclick="location.href='@Url.Action("ReturnBook", "Home", new {loanId = loan.LoanId})'"/>
+                        
+                    </div>
+                    <div class="card-footer text-center">
+                        <input class="btn btn-primary btn-block" type="button" value="Return Book" onclick="location.href='@Url.Action("ReturnBook", "Home", new {loanId = loan.LoanId})'"/>
                     </div>
                 </div>
 
